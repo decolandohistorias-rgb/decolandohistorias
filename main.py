@@ -36,7 +36,7 @@ def user_loader(id):
     return usuario
 @app.route("/")
 def home():
-    return render_template("home.html")
+    return "hello this site is working!"
 @app.route("/home", methods=["GET","POST"])
 @login_required
 def client_home():
@@ -237,3 +237,4 @@ if __name__=='__main__':
     scheduler.init_app(app)
     scheduler.start()
     app.run(debug=True)
+
