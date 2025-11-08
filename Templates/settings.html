@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{ url_for('static', filename='icons/favicon.ico') }}" type="image/x-icon">
+    <title>Decolando Historias - Configurações</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <header>
+        <a href="{{ url_for('client_home') }}">
+                <button type="button" class="btn btn-outline-dark m-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-left-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-5.904 2.803a.5.5 0 1 0 .707-.707L6.707 6h2.768a.5.5 0 1 0 0-1H5.5a.5.5 0 0 0-.5.5v3.975a.5.5 0 0 0 1 0V6.707z"/>
+                    </svg>
+                    Voltar</button>
+        </a>
+    </header>
+
+    <h1 class="m-3 pb-3" style="font-weight: bold;">Configurações:</h1>
+    <hr>
+    <h3 class="m-3 pt-3">Profile:</h3>
+    <div class="d-flex align-items-center">  
+        <h5 class="ms-4">Seção de Profile: 
+            <a href="{{ url_for('profile') }}">    
+                <button class="btn btn-secondary btn-sm">Profile</button>
+            </a>
+        </h5>
+        <h5 class="ms-5">Alterar Nome: 
+            <a href="{{ url_for('edit') }}">    
+                <button class="btn btn-secondary btn-sm">Alterar Nome</button>
+            </a>
+        </h5>
+        </div>
+        <hr>
+        <h3 class="m-3">Inicio:</h3>
+        <div class="d-flex align-items-center ms-5 pt-2">
+            <div class="form-check form-switch">    
+            <form action="/settings" method="POST">
+                <input class="form-check-input" type="checkbox" role="switch" id="switchCheckChecked"  name="voo_check" checked>
+                <h6>Visualizar aviso de nenhum voo registrado</h6>
+                
+                <input class="form-check-input" type="checkbox" role="switch" id="switchCheckChecked" name="tabela_check" checked>
+                <h6>Visualizar tabela de voos (Quando algum voo ja esta registrado)</h6>
+                
+                <input class="form-check-input" type="checkbox" role="switch" id="switchCheckChecked" name="logout_check" checked>
+                <h6>Mostrar botao de fazer Logout</h6>
+                
+                <button type="submit" class="btn btn-secondary">Salvar Alteracoes</button>
+            </form>
+            </div>
+        </div>
+    
+  </body>
+</html>

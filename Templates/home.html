@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{ url_for('static', filename='icons/favicon.ico') }}" type="image/x-icon">
+    <title>Decolando Histórias - Inicio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_circle" />
+    <style>
+        body {
+            /* Use url_for() dentro da tag <style> */
+            background-image: url("{{ url_for('static', filename='images/fundo.png') }}");
+            background-size: cover;
+            color: #F8F9FA;
+            font-weight: bold;
+            }
+        header {
+            background-image: linear-gradient(to bottom, rgb(36, 36, 36), rgba(255, 255, 255, 0)), url("[[url_for('static', filename-'images/fundo.png')]");
+            background-color:rgba(99, 99, 99,);
+            padding-bottom: 40px
+        }
+        h2 {
+            color:rgb(201,201,201);
+            font-weight: bold;
+            }
+        h1 {
+            color:rgb(201,201,201);
+            font-weight: bold;
+            }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        span {
+            
+            {% if current_user.profile_cor %}
+                background-color: {{ current_user.profile_cor }};
+            {% else %}
+                background-color: none; /* Exemplo de cor padrão (cinza claro) */
+            {% endif %}
+            border-radius: 50%;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="opacity-100"> 
+        <header>
+            <div class="p-2">    
+                <a href="/">  
+                <h2><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
+                        <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849m.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1s-.458.158-.678.599"/>
+                        </svg> Decolando Historias</h2>
+                </a>  
+            </div>
+        <div class="position-absolute top-0 end-0"> 
+            <div class="px-2">
+                <div class="d-flex align-items-center gap-3 m-2">
+                    <a href="{{ url_for('sobre_route.sobre') }}">   
+                        <button class="btn btn-secondary me-2">Sobre</button>
+                    </a>
+                    {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('profile') }}">   
+                        <h4> <span class="material-symbols-outlined">account_circle</span>{{current_user.nome.split()[0]}} {{current_user.nome.split()[-1]}}</h4>
+                    </a>
+                    {% else %}
+                        <a href="{{ url_for('login') }}">
+                            <button class="btn btn-secondary">Login</button>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        </header>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <div class="position-absolute top-50 start-50 translate-middle">
+        <div class="text-center">    
+            <h1>Decole Historias Aqui!</h1>
+            <h6>Sua próxima grande aventura começa aqui.
+                Entre para o Decolando Histórias e</h6>
+            <h6>comece a escrever sua própria jornada!</h6>
+            <a href="{{ url_for('teste_log') }}">    
+                <button type="button" class="btn btn-outline-secondary btn-lg">Entrar!</button>
+            </a>    
+        </div>
+    </div>
+  </body>
+</html>

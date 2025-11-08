@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decolando Historias - Adcionar Familiar</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts - Tipografia 'Poppins' -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f4f8; /* Fundo cinza suave */
+            min-height: 100vh;
+        }
+        .form-card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            max-width: 450px;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="d-flex align-items-center justify-content-center min-vh-100">
+        <div class="card form-card mx-auto text-center">
+            <h4 class="mb-4">Adcionar Familiar</h4>
+            
+            <!-- Exibe o nome atual do usuário -->
+
+            <!-- Formulário para alterar o nome -->
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="new_name" class="form-label text-start w-100">Email do Familiar</label>
+                    <input type="text" class="form-control" id="new_name" name="emailForm" placeholder="Digite o email do familiar" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Procurar</button>
+            </form>
+
+            <a href="{{ url_for('familia') }}" class="btn btn-link mt-3 text-secondary">Voltar</a>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

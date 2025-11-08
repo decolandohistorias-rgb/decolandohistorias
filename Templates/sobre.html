@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{ url_for('static', filename='icons/favicon.ico') }}" type="image/x-icon">
+    <title>Decolando Historias - Sobre</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+        img {
+            width: 250px;
+            height: auto;
+        }
+    </style>
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    
+
+    <header>
+        <div class="container-fluid">
+            <a href="{{ url_for('home') }}">
+                <button type="button" class="btn btn-outline-dark m-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-left-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-5.904 2.803a.5.5 0 1 0 .707-.707L6.707 6h2.768a.5.5 0 1 0 0-1H5.5a.5.5 0 0 0-.5.5v3.975a.5.5 0 0 0 1 0V6.707z"/>
+                    </svg>
+                    Voltar</button>
+            </a>
+        </div>
+    </header>
+    <hr>
+    <h1 class="container-fluid">Sobre</h1>
+    <div class="container-fluid">
+    <p>Decolando Histórias é o seu espaço para explorar o mundo, 
+        guardar suas memórias e se inspirar. Esse site foi criado para
+         todos que amam viajar e acreditam que cada aventura é uma 
+         história para ser contada. Ela é a plataforma perfeita para 
+         quem deseja registrar suas jornadas de forma especial e 
+         organizada.</p>
+    <p>Aqui, você pode registrar suas viagens criando um diário 
+        interativo e personalizado. Com fotos, vídeos e textos, 
+        é possível manter um registro completo dos lugares que visitou 
+        e das experiências que viveu. Funciona como um álbum de 
+        memórias digital, pronto para ser revisitado a qualquer 
+        momento.    
+    </p>
+    <p>Além disso, nosso site oferece um acervo de guias e dicas 
+        práticas para ajudar a planejar a sua próxima aventura. 
+        Também temos ferramentas para simplificar a sua vida de viajante, 
+        como um conversor de moedas.</p>
+    <p>Acreditamos no poder das histórias para inspirar novas jornadas. 
+        Nosso objetivo é que você compartilhe suas experiências e, ao 
+        mesmo tempo, descubra os relatos de outros aventureiros. Este 
+        site foi feito com muito carinho e dedicação, especialmente para 
+        a minha o aniversario de 40 anos da minha mae.</p>
+    <img src="{{ url_for('static', filename='images/birthday.png') }}" alt="Imagem de Feliz Aniversario">
+    </div>
+  </body>
+</html>
