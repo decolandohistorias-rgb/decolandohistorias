@@ -18,6 +18,9 @@ app.secret_key = 'azulzinhoplays'
 lm = LoginManager(app)
 database = "postgresql://decolandohistorias_host:F8JZ4vzpn6kePB4XKpYiP6c0YbN1S5i2@dpg-d47ocjqli9vc738shaig-a.oregon-postgres.render.com/decolandohistorias_database_fmhk"
 app.config["SQLALCHEMY_DATABASE_URI"] = database
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_POOL_RECYCLE'] = 300
+app.config['SQLALCHEMY_POOL_SIZE'] = 10
 db.init_app(app)
 lm.login_view = 'login'
 scheduler = APScheduler()
