@@ -10,15 +10,16 @@
     <style>
         body {
             /* Use url_for() dentro da tag <style> */
-            background-image: url("{{ url_for('static', filename='images/fundo2.png') }}");
+            background-image: url("/static/images/fundo2.png");
             background-size: cover;
             color: #F8F9FA;
             font-weight: bold;
             }
         header {
             background-image: linear-gradient(to bottom, rgb(46, 31, 255), rgba(47, 24, 255, 0)), url("[[url_for('static', filename-'images/fundo.png')]");
-            background-color:rgba(99, 99, 99);
+            background-color:rgba(99, 99, 99,);
             padding-bottom: 40px
+        }
         }
         h2 {
             color:rgb(201,201,201);
@@ -159,3 +160,4 @@
   </body>
 
 </html>
+
