@@ -36,7 +36,7 @@ def user_loader(id):
     return usuario
 @app.route("/")
 def home():
-    return "hello this site is working!"
+    return render_template("home.html")
 @app.route("/home", methods=["GET","POST"])
 @login_required
 def client_home():
