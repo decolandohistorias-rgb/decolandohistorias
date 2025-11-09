@@ -174,6 +174,7 @@ def registrar_voo():
 
 @app.route("/send-flight-email")
 def send_flight_email(proximo_voo, current_user):
+    email_user = current_user.email
     # Create the HTML body
     corpo_email = f"""
     <h1>Faltam exatamente 3h para o voo {proximo_voo.number}!</h1>
