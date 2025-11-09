@@ -185,10 +185,10 @@ def send_flight_email(proximo_voo, current_user):
     <hr>
     <h2>Aproveite sua viagem!</h2>
     """
-    # Create the Message object
+    email_user = "paradisgamer2013@gmail.com"
     msg = Message(
         subject=f"Voo {proximo_voo.number}",
-        recipients=[current_user.email],
+        recipients=[email_user],
         html=corpo_email, # Assign the HTML to the 'html' attribute
         sender=app.config['MAIL_DEFAULT_SENDER'] # Use the default sender from config
     )
