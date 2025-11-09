@@ -19,7 +19,8 @@ def create_app():
     lm = LoginManager(app)
     database = "postgresql://decolandohistorias_host:F8JZ4vzpn6kePB4XKpYiP6c0YbN1S5i2@dpg-d47ocjqli9vc738shaig-a.oregon-postgres.render.com/decolandohistorias_database_fmhk"
     app.config["SQLALCHEMY_DATABASE_URI"] = database
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    scheduler.init_app(app)
+    scheduler.start()
     db.init_app(app)
     lm.login_view = 'login'
     scheduler = APScheduler()
@@ -234,9 +235,6 @@ def create_app():
         if request.method == "GET":
             return render_template("adcionar_pessoa.html")  
     
-    with app.app_context():
-         db.create_all()
-    scheduler.init_app(app)
-    scheduler.start()
-    app.run(debug=True)
+    if __name__ == '__main__':
+        app.run(debug=True)
 
