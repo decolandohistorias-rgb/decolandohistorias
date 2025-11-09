@@ -194,7 +194,7 @@ def send_flight_email(proximo_voo, current_user):
     )
    
     mail.send(msg)
-    return render_template("registrar_voo.html", adcionou=adcionou)
+    return "uaau!"
 @app.route("/home/register_flight/info")
 def info():
     return render_template("info_num.html")
