@@ -23,6 +23,13 @@ app.secret_key = 'azulzinhoplays'
 lm = LoginManager(app)
 database = "postgresql://decolandohistorias_host:F8JZ4vzpn6kePB4XKpYiP6c0YbN1S5i2@dpg-d47ocjqli9vc738shaig-a.oregon-postgres.render.com/decolandohistorias_database_fmhk"
 app.config["SQLALCHEMY_DATABASE_URI"] = database
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False # Use TLS, not SSL
+app.config['MAIL_USERNAME'] = 'decolandohistorias@gmail.com'
+app.config['MAIL_PASSWORD'] = 'gsusxjiawpwcpvjn' # Use your actual App Password
+app.config['MAIL_DEFAULT_SENDER'] = 'decolandohistorias@gmail.com' # Set a default sender
 db.init_app(app)
 lm.login_view = 'login'
 scheduler = APScheduler()
@@ -160,33 +167,34 @@ def registrar_voo():
             email_user = current_user.email
             print(email_user)
             print(f"{data_voo_data.year} {Horario_Saida_Data_3h.hour}")
-        
-            corpo_email = f"""
-                <h1>Faltam exatamente 3h para o voo {proximo_voo.number}!</h1> 
-                <hr>
-                <h3>Se prepare para chegar no aeroporto de {proximo_voo.departure} em pelo menos 30 minutos!</h3>
-                <hr>
-                <h3>Seu terminal e: {terminal}</h3>
-                <h3>Seu gate nao esta disponivel agora.</h3>
-                <hr>
-                <h2>Aproveite sua viagem!</h2>
-            """
-            msg = email.message.Message()
-            msg['Subject'] = f"Voo {proximo_voo.number}"
-            msg['From'] = 'decolandohistorias@gmail.com'
-            msg['To'] = f'{email_user}'
-            password = 'gsusxjiawpwcpvjn' 
-            msg.add_header('Content-Type', 'text/html')
-            msg.set_payload(corpo_email)
-            s = smtplib.SMTP('smtp.gmail.com: 587')
-            s.starttls()
-            # Login Credentials for sending the mail
-            s.login(msg['From'], password)
-            s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
-            return render_template("registrar_voo.html", adcionou=adcionou)
+            return redirect(url_for('send_flight_email'))
         except:
             erro = True
             return render_template("registrar_voo.html", erro=erro)
+
+@app.route("/send-flight-email")
+def send_flight_email(proximo_voo):
+    # Create the HTML body
+    corpo_email = f"""
+    <h1>Faltam exatamente 3h para o voo {proximo_voo.number}!</h1>
+    <hr>
+    <h3>Se prepare para chegar no aeroporto de {proximo_voo.departure} em pelo menos 30 minutos!</h3>
+    <hr>
+    <h3>Seu terminal e: {terminal}</h3>
+    <h3>Seu gate nao esta disponivel agora.</h3>
+    <hr>
+    <h2>Aproveite sua viagem!</h2>
+    """
+    # Create the Message object
+    msg = Message(
+        subject=f"Voo {proximo_voo.number}",
+        recipients=[email_user],
+        html=corpo_email, # Assign the HTML to the 'html' attribute
+        sender=app.config['MAIL_DEFAULT_SENDER'] # Use the default sender from config
+    )
+   
+    mail.send(msg)
+    return render_template("registrar_voo.html", adcionou=adcionou)
 @app.route("/home/register_flight/info")
 def info():
     return render_template("info_num.html")
