@@ -168,41 +168,37 @@ def registrar_voo():
             email_user = current_user.email
             print(email_user)
             print(f"{data_voo_data.year} {Horario_Saida_Data_3h.hour}")
-            
+            email_user = current_user.email
             corpo_email = f"""
-            <h1>Faltam exatamente 3h para o voo {proximo_voo.number}!</h1>
-            <hr>
-            <h3>Se prepare para chegar no aeroporto de {proximo_voo.departure} em pelo menos 30 minutos!</h3>
-            <hr>
-            <h3>Seu terminal e: {terminal}</h3>
-            <h3>Seu gate nao esta disponivel agora.</h3>
-            <hr>
-            <h2>Aproveite sua viagem!</h2>
-            """
-            
-            msg = Message(
-                subject=f"Voo {proximo_voo.number}",
-                recipients=[email_user], 
-                html=corpo_email,
-                sender=current_app.config['MAIL_DEFAULT_SENDER']
-            )
+                <h1>Faltam exatamente 3h para o voo {proximo_voo.number}!</h1>
+                <hr>
+                <h3>Se prepare para chegar no aeroporto de {proximo_voo.departure} em pelo menos 30 minutos!</h3>
+                <hr>
+                <h3>Seu terminal e: {terminal}</h3>
+                <h3>Seu gate nao esta disponivel agora.</h3>
+                <hr>
+                <h2>Aproveite sua viagem!</h2>
+                """
 
-            try:
-                mail.send(msg)
-                print(f"E-mail de notificação enviado para {email_user}!")
-            except Exception as e:
-                print(f"Erro ao enviar e-mail: {str(e)}")
-            
-            # --- End Email Logic ---
+                msg = Message(
+                    subject=f"Voo {proximo_voo.number}",
+                    recipients=[email_user], 
+                    html=corpo_email,
+                    # Change current_app.config to app.config
+                    sender=app.config['MAIL_DEFAULT_SENDER'] 
+                )
 
-            # Now redirect the user to a confirmation page or home page
-            return redirect(url_for('home')) # Redirect to a valid endpoint, e.g., 'home'
+                try:
+                    mail.send(msg)
+                    print(f"E-mail de notificação enviado para {email_user}!")
+                except Exception as e:
+                    print(f"Erro ao enviar e-mail: {str(e)}")
 
-        except Exception as e:
-            # Handle potential scraping errors or database errors
-            print(f"An error occurred during flight registration/scraping: {str(e)}")
-            erro = True
-            return render_template("registrar_voo.html", erro=erro)
+                # --- End Email Logic ---
+
+                # Redirect the user
+                return redirect(url_for('home'))
+
 
 @app.route("/home/register_flight/info")
 def info():
