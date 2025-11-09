@@ -193,8 +193,11 @@ def send_flight_email(proximo_voo, current_user):
         sender=app.config['MAIL_DEFAULT_SENDER'] # Use the default sender from config
     )
    
-    mail.send(msg)
-    return "uaau!"
+    try:
+         mail.send(msg)
+         return f"E-mail enviado para {email_user} com sucesso!"
+     except Exception as e:
+         return f"Ocorreu um erro ao enviar o e-mail: {str(e)}"
 @app.route("/home/register_flight/info")
 def info():
     return render_template("info_num.html")
