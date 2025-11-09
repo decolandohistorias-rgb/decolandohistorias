@@ -12,6 +12,7 @@ from flask_apscheduler import APScheduler
 import smtplib
 import email.message
 from apscheduler.schedulers.background import BackgroundScheduler
+from flask-mail import message
 
 
 class Config:
@@ -167,38 +168,42 @@ def registrar_voo():
             email_user = current_user.email
             print(email_user)
             print(f"{data_voo_data.year} {Horario_Saida_Data_3h.hour}")
-            return redirect(url_for('send_flight_email'))
-        except:
+            
+            corpo_email = f"""
+            <h1>Faltam exatamente 3h para o voo {proximo_voo.number}!</h1>
+            <hr>
+            <h3>Se prepare para chegar no aeroporto de {proximo_voo.departure} em pelo menos 30 minutos!</h3>
+            <hr>
+            <h3>Seu terminal e: {terminal}</h3>
+            <h3>Seu gate nao esta disponivel agora.</h3>
+            <hr>
+            <h2>Aproveite sua viagem!</h2>
+            """
+            
+            msg = Message(
+                subject=f"Voo {proximo_voo.number}",
+                recipients=[email_user], 
+                html=corpo_email,
+                sender=current_app.config['MAIL_DEFAULT_SENDER']
+            )
+
+            try:
+                mail.send(msg)
+                print(f"E-mail de notificação enviado para {email_user}!")
+            except Exception as e:
+                print(f"Erro ao enviar e-mail: {str(e)}")
+            
+            # --- End Email Logic ---
+
+            # Now redirect the user to a confirmation page or home page
+            return redirect(url_for('home')) # Redirect to a valid endpoint, e.g., 'home'
+
+        except Exception as e:
+            # Handle potential scraping errors or database errors
+            print(f"An error occurred during flight registration/scraping: {str(e)}")
             erro = True
             return render_template("registrar_voo.html", erro=erro)
 
-@app.route("/send-flight-email")
-def send_flight_email(proximo_voo, current_user):
-    email_user = current_user.email
-    # Create the HTML body
-    corpo_email = f"""
-    <h1>Faltam exatamente 3h para o voo {proximo_voo.number}!</h1>
-    <hr>
-    <h3>Se prepare para chegar no aeroporto de {proximo_voo.departure} em pelo menos 30 minutos!</h3>
-    <hr>
-    <h3>Seu terminal e: {terminal}</h3>
-    <h3>Seu gate nao esta disponivel agora.</h3>
-    <hr>
-    <h2>Aproveite sua viagem!</h2>
-    """
-    email_user = "paradisgamer2013@gmail.com"
-    msg = Message(
-        subject=f"Voo {proximo_voo.number}",
-        recipients=[email_user],
-        html=corpo_email, # Assign the HTML to the 'html' attribute
-        sender=app.config['MAIL_DEFAULT_SENDER'] # Use the default sender from config
-    )
-   
-    try:
-         mail.send(msg)
-         return f"E-mail enviado para {email_user} com sucesso!"
-    except:
-         return f"Ocorreu um erro ao enviar o e-mail"
 @app.route("/home/register_flight/info")
 def info():
     return render_template("info_num.html")
