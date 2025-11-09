@@ -173,7 +173,7 @@ def registrar_voo():
             return render_template("registrar_voo.html", erro=erro)
 
 @app.route("/send-flight-email")
-def send_flight_email(proximo_voo):
+def send_flight_email(proximo_voo, current_user):
     # Create the HTML body
     corpo_email = f"""
     <h1>Faltam exatamente 3h para o voo {proximo_voo.number}!</h1>
@@ -188,7 +188,7 @@ def send_flight_email(proximo_voo):
     # Create the Message object
     msg = Message(
         subject=f"Voo {proximo_voo.number}",
-        recipients=[email_user],
+        recipients=[current_user.email],
         html=corpo_email, # Assign the HTML to the 'html' attribute
         sender=app.config['MAIL_DEFAULT_SENDER'] # Use the default sender from config
     )
