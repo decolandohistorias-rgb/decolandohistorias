@@ -196,7 +196,7 @@ def send_flight_email(proximo_voo, current_user):
     try:
          mail.send(msg)
          return f"E-mail enviado para {email_user} com sucesso!"
-     except Exception as e:
+     except:
          return f"Ocorreu um erro ao enviar o e-mail: {str(e)}"
 @app.route("/home/register_flight/info")
 def info():
