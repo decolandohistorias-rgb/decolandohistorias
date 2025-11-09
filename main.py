@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, Blueprint, redirect, url_for, flash
 from routes.sobre import sobre_route
 from models import Usuario, Flights, Settings, Family
@@ -10,11 +11,14 @@ import hashlib
 from flask_apscheduler import APScheduler
 import smtplib
 import email.message
+from apscheduler.schedulers.background import BackgroundScheduler
 
 
 class Config:
     SCHEDULER_API_ENABLED = True
 app = Flask(__name__)
+scheduler = BackgroundScheduler()
+scheduler.start() 
 app.secret_key = 'azulzinhoplays'
 lm = LoginManager(app)
 database = "postgresql://decolandohistorias_host:F8JZ4vzpn6kePB4XKpYiP6c0YbN1S5i2@dpg-d47ocjqli9vc738shaig-a.oregon-postgres.render.com/decolandohistorias_database_fmhk"
