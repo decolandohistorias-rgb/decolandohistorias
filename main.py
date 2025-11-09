@@ -10,7 +10,8 @@ import hashlib
 from flask_apscheduler import APScheduler
 import smtplib
 import email.message
-  
+
+def create_app():  
     class Config:
         SCHEDULER_API_ENABLED = True
     app = Flask(__name__)
@@ -231,12 +232,12 @@ import email.message
     @app.route("/adcionar_familiar", methods=["GET","POST"])
     def adcionar_pessoa():
         if request.method == "GET":
-            return render_template("adcionar_pessoa.html")
-    if __name__=='__main__':    
+            return render_template("adcionar_pessoa.html")  
+
+    if __name__ == '__main__':    
         with app.app_context():
              db.create_all()
         scheduler.init_app(app)
         scheduler.start()
         app.run(debug=True)
-    
-    
+
