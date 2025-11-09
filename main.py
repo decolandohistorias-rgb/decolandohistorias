@@ -12,7 +12,7 @@ from flask_apscheduler import APScheduler
 import smtplib
 import email.message
 from apscheduler.schedulers.background import BackgroundScheduler
-from flask_mail import message
+from flask_mail import Message
 
 
 class Config:
