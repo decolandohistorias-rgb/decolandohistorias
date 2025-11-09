@@ -10,8 +10,7 @@ import hashlib
 from flask_apscheduler import APScheduler
 import smtplib
 import email.message
-
-def create_app():  
+  
     class Config:
         SCHEDULER_API_ENABLED = True
     app = Flask(__name__)
@@ -19,8 +18,7 @@ def create_app():
     lm = LoginManager(app)
     database = "postgresql://decolandohistorias_host:F8JZ4vzpn6kePB4XKpYiP6c0YbN1S5i2@dpg-d47ocjqli9vc738shaig-a.oregon-postgres.render.com/decolandohistorias_database_fmhk"
     app.config["SQLALCHEMY_DATABASE_URI"] = database
-    scheduler.init_app(app)
-    scheduler.start()
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
     lm.login_view = 'login'
     scheduler = APScheduler()
@@ -233,8 +231,12 @@ def create_app():
     @app.route("/adcionar_familiar", methods=["GET","POST"])
     def adcionar_pessoa():
         if request.method == "GET":
-            return render_template("adcionar_pessoa.html")  
-    
-    if __name__ == '__main__':
+            return render_template("adcionar_pessoa.html")
+    if __name__=='__main__':    
+        with app.app_context():
+             db.create_all()
+        scheduler.init_app(app)
+        scheduler.start()
         app.run(debug=True)
-
+    
+    
