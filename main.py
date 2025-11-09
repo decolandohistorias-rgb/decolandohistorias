@@ -160,39 +160,29 @@ def registrar_voo():
             email_user = current_user.email
             print(email_user)
             print(f"{data_voo_data.year} {Horario_Saida_Data_3h.hour}")
-            def email_3h():
-                corpo_email = f"""
-                    <h1>Faltam exatamente 3h para o voo {proximo_voo.number}!</h1> 
-                    <hr>
-                    <h3>Se prepare para chegar no aeroporto de {proximo_voo.departure} em pelo menos 30 minutos!</h3>
-                    <hr>
-                    <h3>Seu terminal e: {terminal}</h3>
-                    <h3>Seu gate nao esta disponivel agora.</h3>
-                    <hr>
-                    <h2>Aproveite sua viagem!</h2>
-                """
-                msg = email.message.Message()
-                msg['Subject'] = f"Voo {proximo_voo.number}"
-                msg['From'] = 'decolandohistorias@gmail.com'
-                msg['To'] = f'{email_user}'
-                password = 'gsusxjiawpwcpvjn' 
-                msg.add_header('Content-Type', 'text/html')
-                msg.set_payload(corpo_email)
-                s = smtplib.SMTP('smtp.gmail.com: 587')
-                s.starttls()
-                # Login Credentials for sending the mail
-                s.login(msg['From'], password)
-                s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
-                print("Email enviado")
-            @scheduler.task(
-                'date',
-                id='email_3h',
-                run_date=datetime(
-                    data_voo_data.year, data_voo_data.month, data_voo_data.day, Horario_Saida_Data_3h.hour, Horario_Saida_Data.minute, 0
-                )
-            )
-            def Tarefa():
-                email_3h()
+        
+            corpo_email = f"""
+                <h1>Faltam exatamente 3h para o voo {proximo_voo.number}!</h1> 
+                <hr>
+                <h3>Se prepare para chegar no aeroporto de {proximo_voo.departure} em pelo menos 30 minutos!</h3>
+                <hr>
+                <h3>Seu terminal e: {terminal}</h3>
+                <h3>Seu gate nao esta disponivel agora.</h3>
+                <hr>
+                <h2>Aproveite sua viagem!</h2>
+            """
+            msg = email.message.Message()
+            msg['Subject'] = f"Voo {proximo_voo.number}"
+            msg['From'] = 'decolandohistorias@gmail.com'
+            msg['To'] = f'{email_user}'
+            password = 'gsusxjiawpwcpvjn' 
+            msg.add_header('Content-Type', 'text/html')
+            msg.set_payload(corpo_email)
+            s = smtplib.SMTP('smtp.gmail.com: 587')
+            s.starttls()
+            # Login Credentials for sending the mail
+            s.login(msg['From'], password)
+            s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
             return render_template("registrar_voo.html", adcionou=adcionou)
         except:
             erro = True
