@@ -22,7 +22,7 @@ scheduler = BackgroundScheduler()
 scheduler.start() 
 app.secret_key = 'azulzinhoplays'
 lm = LoginManager(app)
-database = "postgresql://decolandohistorias_host:F8JZ4vzpn6kePB4XKpYiP6c0YbN1S5i2@dpg-d47ocjqli9vc738shaig-a.oregon-postgres.render.com/decolandohistorias_database_fmhk"
+database = "postgresql://postgres:NShQeDISmiNuidjzWgPmaHcpxRJgNgCF@centerbeam.proxy.rlwy.net:22477/railway"
 app.config["SQLALCHEMY_DATABASE_URI"] = database
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
